@@ -15,7 +15,7 @@ class StartResponse(BaseModel):
     start_response: str = "ok"
 
 
-class Move(BaseModel):
+class MoveResponse(BaseModel):
     move: str
     shout: str = None
 
@@ -44,11 +44,11 @@ async def start(request: Request):
     print("START")
     return {"start_response": "ok"}
 
-@app.post("/move", response_model=Move)
-def move(request: Request):
+@app.post("/move", response_model=MoveResponse)
+async def move(request: Request):
     # This function is called on every turn of a game. It's how your snake decides where to move.
     # Valid moves are "up", "down", "left", or "right".
-    data = request.json()
+    data = await request.json()
 
     # Choose a random direction to move in
     possible_moves = ["up", "down", "left", "right"]
@@ -58,10 +58,10 @@ def move(request: Request):
     return {"move": move}
 
 @app.post("/end", response_model=EndResponse)
-def end(request: Request):
+async def end(request: Request):
     # This function is called when a game your snake was in ends.
     # It's purely for informational purposes, you don't have to make any decisions here.
-    data = request.json()
+    data = await request.json()
 
     print("END")
     return {"end_response": "ok"}

@@ -52,18 +52,18 @@ async def move(request: Request):
     print(f"MOVE: {move}")
     return {"move": move}
 
-@app.post("/end", response_model=EndResponse)
-async def end(request: Request):
-    # This function is called when a game your snake was in ends.
-    # It's purely for informational purposes, you don't have to make any decisions here.
-    data = await request.json()
+# @app.post("/end", response_model=EndResponse)
+# async def end(request: Request):
+#     # This function is called when a game your snake was in ends.
+#     # It's purely for informational purposes, you don't have to make any decisions here.
+#     data = await request.json()
 
-    print("END")
-    return {"end_response": "ok"}
+#     print("END")
+#     return {"end_response": "ok"}
 
-@app.post("/start", response_model=StartResponse)
-async def start(request: Request):
-    data = await request.json()
+# @app.post("/start", response_model=StartResponse)
+# async def start(request: Request):
+#     data = await request.json()
 
-    print("START")
-    return {"start_response": "ok"}
+#     print("START")
+#     return {"start_response": "ok"}

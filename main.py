@@ -1,4 +1,5 @@
-from fastapi import FastAPI, Request
+import uvicorn
+from fastapi import FastAPI
 from pydantic import BaseModel
 
 import random
@@ -43,14 +44,14 @@ def index():
         "tail": "default",  # TODO: Personalize
     } 
 
-@app.post("/start/")
+@app.post("/start", response_model=StartResponse)
 def start(board_data: BoardData):
     data = board_data
 
     print("START")
     return {"start_response": "ok"}
 
-@app.post("/move/")
+@app.post("/move", response_model=MoveResponse)
 def move(board_data: BoardData):
     data = board_data
 
@@ -61,9 +62,12 @@ def move(board_data: BoardData):
     print(f"MOVE: {move}")
     return {"move": move}
 
-@app.post("/end/")
+@app.post("/end", response_model=EndResponse)
 def end(board_data: BoardData):
     data = board_data
 
     print("END")
     return {"end_response": "ok"}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

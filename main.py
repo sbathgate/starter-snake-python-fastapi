@@ -37,12 +37,7 @@ def index():
         "tail": "default",  # TODO: Personalize
     } 
 
-@app.post("/start", response_model=StartResponse)
-async def begin(request: Request):
-    data = await request.json()
 
-    print("START")
-    return {"start_response": "ok"}
 
 @app.post("/move", response_model=MoveResponse)
 async def move(request: Request):
@@ -65,3 +60,10 @@ async def end(request: Request):
 
     print("END")
     return {"end_response": "ok"}
+
+@app.post("/start", response_model=StartResponse)
+async def start(request: Request):
+    data = await request.json()
+
+    print("START")
+    return {"start_response": "ok"}

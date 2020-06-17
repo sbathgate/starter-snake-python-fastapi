@@ -44,15 +44,12 @@ def index():
         "tail": "default",  # TODO: Personalize
     } 
 
-@app.get("/start")
+@app.post("/start")
 def read_start(board_data: BoardData):
     data = board_data
 
-@app.post("/start", response_model=StartResponse)
-def return_start(board_data: BoardData):
-    data = board_data
-
-    print("START")
+@app.get("/start", response_model=StartResponse)
+def return_start():
     return {"start_response": "ok"}
 
 @app.post("/move", response_model=MoveResponse)

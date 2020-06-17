@@ -3,6 +3,12 @@ from pydantic import BaseModel
 
 import random
 
+class BoardData(BaseModel):
+    game: dict = None
+    turn: int = None
+    board: dict = None
+    you: dict = None
+
 class IndexResponse(BaseModel):
     apiversion: str
     author: str = None
@@ -37,13 +43,16 @@ def index():
         "tail": "default",  # TODO: Personalize
     } 
 
+@app.post("/start", response_model=StartResponse)
+async def start(board_data: BoardData):
+    data = board_data
 
+    print("START")
+    return {"start_response": "ok"}
 
 @app.post("/move", response_model=MoveResponse)
-async def move(request: Request):
-    # This function is called on every turn of a game. It's how your snake decides where to move.
-    # Valid moves are "up", "down", "left", or "right".
-    data = await request.json()
+async def move(board_data: BoardData):
+    data = board_data
 
     # Choose a random direction to move in
     possible_moves = ["up", "down", "left", "right"]
@@ -52,18 +61,9 @@ async def move(request: Request):
     print(f"MOVE: {move}")
     return {"move": move}
 
-# @app.post("/end", response_model=EndResponse)
-# async def end(request: Request):
-#     # This function is called when a game your snake was in ends.
-#     # It's purely for informational purposes, you don't have to make any decisions here.
-#     data = await request.json()
+@app.post("/end", response_model=EndResponse)
+async def end(board_data: BoardData):
+    data = board_data
 
-#     print("END")
-#     return {"end_response": "ok"}
-
-# @app.post("/start", response_model=StartResponse)
-# async def start(request: Request):
-#     data = await request.json()
-
-#     print("START")
-#     return {"start_response": "ok"}
+    print("END")
+    return {"end_response": "ok"}

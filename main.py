@@ -45,6 +45,7 @@ def index():
     } 
 
 @app.post("/start", response_model=StartResponse)
+@app.get("/start/")
 def start(board_data: BoardData):
     data = board_data
 
@@ -52,6 +53,7 @@ def start(board_data: BoardData):
     return {"start_response": "ok"}
 
 @app.post("/move", response_model=MoveResponse)
+@app.get("/move/")
 def move(board_data: BoardData):
     data = board_data
 
@@ -63,6 +65,7 @@ def move(board_data: BoardData):
     return {"move": move}
 
 @app.post("/end", response_model=EndResponse)
+@app.get("/end/")
 def end(board_data: BoardData):
     data = board_data
 

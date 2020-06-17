@@ -43,15 +43,15 @@ def index():
         "tail": "default",  # TODO: Personalize
     } 
 
-@app.post("/start", response_model=StartResponse)
-async def start(board_data: BoardData):
+@app.post("/start/")
+def start(board_data: BoardData):
     data = board_data
 
     print("START")
     return {"start_response": "ok"}
 
-@app.post("/move", response_model=MoveResponse)
-async def move(board_data: BoardData):
+@app.post("/move/")
+def move(board_data: BoardData):
     data = board_data
 
     # Choose a random direction to move in
@@ -61,8 +61,8 @@ async def move(board_data: BoardData):
     print(f"MOVE: {move}")
     return {"move": move}
 
-@app.post("/end", response_model=EndResponse)
-async def end(board_data: BoardData):
+@app.post("/end/")
+def end(board_data: BoardData):
     data = board_data
 
     print("END")

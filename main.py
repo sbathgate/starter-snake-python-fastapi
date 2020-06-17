@@ -38,7 +38,7 @@ def index():
     } 
 
 @app.post("/start", response_model=StartResponse)
-async def start(request: Request):
+async def begin(request: Request):
     data = await request.json()
 
     print("START")
